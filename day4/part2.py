@@ -14,12 +14,6 @@ regexes = [
     r'pid:\d{9}(\s|$)'
 ]
 for p in passports:
-    is_valid = True
-    for r in regexes:
-        if re.search(r, p) is None:
-            is_valid = False
-            break
-    if is_valid:
+    if not any([re.search(r, p) is None for r in regexes]):
         valid += 1
-
 print valid
