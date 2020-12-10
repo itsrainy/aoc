@@ -13,7 +13,6 @@ for i, val in enumerate(code):
         if is_sum:
             break
     if is_sum == False:
-        import pdb; pdb.set_trace()
         print val
         break
     else:
