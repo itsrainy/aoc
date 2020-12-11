@@ -21,19 +21,23 @@ def count_occupied(b):
                 occ += 1
     return occ
 
+def count_adj_occupied(b, idx):
+    adj_full = 0
+    for a in adj:
+        check_i = idx[0] + a[0]
+        check_j = idx[1] + a[1]
+        if check_i >= len(board) or check_j >= len(board[0]) or check_i < 0 or check_j < 0:
+            continue
+        cell = board[check_i][check_j]
+        if cell == "#":
+            adj_full += 1
+    return adj_full
+
 while True:
     changed = False
     for i in range(len(board)):
         for j in range(len(board[0])):
-            adj_full = 0
-            for a in adj:
-                check_i = i + a[0]
-                check_j = j+a[1]
-                if check_i >= len(board) or check_j >= len(board[0]) or check_i < 0 or check_j < 0:
-                    continue
-                cell = board[check_i][check_j]
-                if cell == "#":
-                    adj_full += 1
+            adj_full = count_adj_occupied(board, (i, j))
             if board[i][j] == "L" and adj_full == 0:
                 changed = True
                 next_board[i][j] = "#"
@@ -45,4 +49,3 @@ while True:
     board = copy.deepcopy(next_board)
 
 print count_occupied(board)
-
